@@ -104,10 +104,10 @@ class MemeSection extends Component {
         addOrRemoveMemeFromCollage(meme)
     }
 
-    addToFavourites = (e, { thumbPath, id, urlPath, description } = {}) => {
+    addToFavourites = (e, { thumbPath, id, urlPath, description, rating } = {}) => {
         e.stopPropagation()
         e.preventDefault()
-        this.props.addToFavourites({ thumbPath, id, urlPath, description })
+        this.props.addToFavourites({ thumbPath, id, urlPath, description, rating })
     }
 
     showMemePreviewModal = (meme) => {
