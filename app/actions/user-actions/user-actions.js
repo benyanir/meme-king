@@ -181,7 +181,6 @@ export function addToFavourites(data) {
 }
 
 export function removeFromFavorites(memeId) {
-    debugger;
     return {
         [CALL_API]: {
             endpoint: `${config.apiBaseUrl}/personal-meme`,
