@@ -35,6 +35,7 @@ const MemeThumb = ({
                        to,
                        urlPath,
                        addToFavourites,
+                       removeFromFavorites,
                        onClick,
                        shouldShowRatingBadge,
                        className,
@@ -43,7 +44,6 @@ const MemeThumb = ({
                        ...rest
 
                 }) => {
-
                     const computedRating = (rating * 4) + helpers.getRandomNumber(0, 1)
 
                     if (hidden) {
@@ -74,7 +74,7 @@ const MemeThumb = ({
                                 {isLoggedIn && (
                                     <Icon
                                         name="HEART"
-                                        onClick={addToFavourites}
+                                        onClick={isFavourite ? removeFromFavorites : addToFavourites}
                                         className="like-heart"
                                         theme={isFavourite ? 'success': "white-success"}
                                     />

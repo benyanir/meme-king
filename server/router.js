@@ -45,6 +45,15 @@ module.exports = function(app) {
 
     })
 
+    app.delete('/api/personal-meme', requireAuth,  function(req, res) {
+
+        const user = req.user || {};
+
+        DbService.addPersonalMeme({ id: user.id, meme: req.body}).then(data => {
+            res.send(helpers.arrayToObjById(data.personalMemes));
+        })
+
+    })
 
 
     app.post('/api/sign-up', Authentication.signUp);

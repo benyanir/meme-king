@@ -14,7 +14,7 @@ import {
 } from 'actions/category-actions/category-actions'
 import { addOrRemoveMemeFromCollage } from 'actions/collage-actions/collage-actions'
 import { showNotification } from 'actions/notification-actions/notification-actions'
-import { addToFavourites } from 'actions/user-actions/user-actions'
+import { addToFavourites, removeFromFavorites } from 'actions/user-actions/user-actions'
 
 // components
 import MemeThumb from 'components/MemeThumb/MemeThumb'
@@ -104,10 +104,16 @@ class MemeSection extends Component {
         addOrRemoveMemeFromCollage(meme)
     }
 
-    addToFavourites = (e, { thumbPath, id, urlPath, description } = {}) => {
+    addToFavourites = (e, { thumbPath, id, urlPath, description, rating } = {}) => {
         e.stopPropagation()
         e.preventDefault()
-        this.props.addToFavourites({ thumbPath, id, urlPath, description })
+        this.props.addToFavourites({ thumbPath, id, urlPath, description, rating })
+    }
+
+    removeFromFavorites = (e, id) => {
+        e.stopPropagation()
+        e.preventDefault()
+        this.props.removeFromFavorites(id)
     }
 
     showMemePreviewModal = (meme) => {
@@ -165,6 +171,7 @@ class MemeSection extends Component {
                                             {...meme}
                                             to={`${match.url}/generator/normal/${meme.id}/normalFormat`}
                                             addToFavourites={(e) => this.addToFavourites(e, meme)}
+                                            removeFromFavorites={(e) => this.removeFromFavorites(e, meme.id)}
                                             onClick={isCollageMode ? (e) => this.handleCollageClick(e, meme) : null}
                                             category={category || meme.category }
                                         />
@@ -212,6 +219,7 @@ function mapDispatchToProps(dispatch, ownProps) {
         addOrRemoveMemeFromCollage: (meme) => dispatch(addOrRemoveMemeFromCollage({ meme })),
         showNotification: (data) => dispatch(showNotification(data)),
         addToFavourites: data => dispatch(addToFavourites(data)),
+        removeFromFavorites: data => dispatch(removeFromFavorites(data))
     }
 }
 

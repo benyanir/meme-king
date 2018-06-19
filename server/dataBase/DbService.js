@@ -358,6 +358,19 @@ const removePersonalMemes = ({ id } = {}) => {
     })
 }
 
+const removePersonalMeme = ({ id, memeId } = {}) => {
+    return new Promise((resolve, reject) => {
+        User.findOne({ _id: id }, function(err, userData){
+            if(userData){
+                userData.personalMemes = userData.personalMemes.filter(function(meme){ return meme.id != memeId});
+                userData.save(function(err) {
+                    resolve();
+                });
+            }
+        });
+    })
+}
+
 const getMemeItems = () => {
     return new Promise(resolve => {
         Item.find({}).exec(function (err, res) {
@@ -418,6 +431,7 @@ const post = {
     saveUserReport,
     removeUserGeneratedMemes,
     addPersonalMeme,
+    removePersonalMeme,
     saveNewItem,
 }
 

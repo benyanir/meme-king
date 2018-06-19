@@ -180,6 +180,28 @@ export function addToFavourites(data) {
 
 }
 
+export function removeFromFavorites(memeId) {
+    debugger;
+    return {
+        [CALL_API]: {
+            endpoint: `${config.apiBaseUrl}/personal-meme`,
+            method: 'DELETE',
+            body: JSON.stringify({"id": memeId}),
+            headers: {
+                'Accept': 'application/json, text/plain, */*',
+                'Content-Type': 'application/json',
+                'authorization': LocalStorage.get('token')
+            },
+            types: [
+                REMOVE_PERSONAL_MEMES_REQUEST,
+                REMOVE_PERSONAL_MEMES_SUCCESS,
+                REMOVE_PERSONAL_MEMES_FAILED
+            ],
+        }
+
+    }
+
+}
 
 export function signUp(payload) {
     return {
